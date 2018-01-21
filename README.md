@@ -38,11 +38,11 @@ Cross-track error(cte) is calculated continuously by the PID controller:
 
 cte = desired point - measured point
 
-The proportional term P is proportional to the current value of cte. In this project, the steer value is adjusted by the controller to keep the car drive along the center line. 
+The proportional term P is proportional to the current value of cte. In this project, the steer value is adjusted by the P controller to keep the car drive toward the reference trajectory. But P will overshoot and cause oscillations.
 
-The integral term I accounts for the past value of cte and integrates them over time. 
+The integral term I accounts for the past value of cte and integrates them over time. If there is a residual error after the application of proportional control P, the integral term I seeks to eliminate the bias.
 
-The differential term D helps to estimate the future trend of the error, based on the current value change. 
+The differential term D helps to reduce the oscillations. It is effectively seeking to reduce the effect of the error by applying a control influence based on the rate of error change. The more rapid the error change, the greater the controlling or dampening effect.
 
 
 ## Describe how the final hyperparameters were chosen.
