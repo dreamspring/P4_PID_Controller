@@ -36,13 +36,20 @@ A PID(proportional–integral–derivative) controller is a control loop feedbac
 
 Cross-track error(cte) is calculated continuously by the PID controller:
 
-cte = desired_point - measured_point
+cte = desired point - measured point
 
-The proportional term P is proportional to the current value of cte. In this project, the steer value is adjusted by the controller to keep the car drive along the center line. If used along, the car overshoots the central line very easily and go out of the road very quickly. 
+The proportional term P is proportional to the current value of cte. In this project, the steer value is adjusted by the controller to keep the car drive along the center line. 
 
-The integral portion tries to eliminate a possible bias on the controlled system that could prevent the error to be eliminated. If used along, it makes the car to go in circles. In the case of the simulator, no bias is present. 
+The integral term I accounts for the past value of cte and integrates them over time. 
 
-The differential portion helps to counteract the proportional trend to overshoot the center line by smoothing the approach to it. 
+The differential term D helps to estimate the future trend of the error, based on the current value change. 
+
 
 ## Describe how the final hyperparameters were chosen.
+
+If using P, I, D controller seperately, the car will go out of the road quickly. The parameters of P, I, and D are tuned manually. Start from the PD controller, set Kp = 1, Ki = 0, Kd =1; then the values of Kp and Kd are tuned to make the car go long the road. If chosing kp - 0.2 and kd = 2, the car can go along the road smoothly. Then the value of Ki is tuned. The final selected parameters are:
+
+Kp = 0.2, Ki = 0.001, Kd = 2.0
+
+
 
